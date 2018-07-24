@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>二维码签到 教师端</title>
+		<!--
+        	作者：2015网络工程
+        	时间：2018-07-21
+        	描述：导入bootstrap
+        -->
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<style>
+			.navbar {
+				margin-bottom: 0px;
+				background: rgba(0, 0, 0, 0);
+			}
+			.jumbotron {
+				background: rgba(0,0,0,0)
+			}
+		</style>
+	</head>
+
+	<body background="img/3.jpg">
+			
+			<!--导航条-->
+			<div>
+				<nav class=class = "navbar navbar-inverse navbar-static-top">
+					<div class="container">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					      </button>
+							<a class="navbar-brand nav-tabs" href="#" style="color: #269ABC;">教师端</a>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+							<ul class="nav navbar-nav navbar-right">
+								<li>
+									<a  class="navbar-brand nav-tabs" href="#"><span class="glyphicon glyphicon-log-in";></span> 登录</a>
+								</li>
+
+							 	<li>
+								<a  class="navbar-brand nav-tabs" href="#"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
+								</li>
+							</ul>
+						</div>
+						<!-- /.navbar-collapse -->
+					</div>
+					<!-- /.container-fluid -->
+				</nav>
+			</div>
+			
+			<!--巨幕-->
+			<div class="jumbotron">
+							<div class="container">
+								<h1 style="color:burlywood">教师端</h1>
+								<p style="color:white">传道、受业、解惑</p>
+							</div>
+						</div>
+						
+			<!--二维码区域-->	
+        	<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			      </div>
+			      <div class="modal-body">
+			       	<img id="ewimg" />
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		
+			<!--正文-->
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-3">
+						<div class="list-group">
+							<a href="#" class="list-group-item active">开始考勤</a>
+							<a href="#" class="list-group-item">学生信息</a>
+							<a href="#" class="list-group-item">请假消息</a>
+							<a href="#" class="list-group-item">考勤记录</a>
+						</div>
+					</div>
+					<div class="col-lg-9 col-md-9" style="background-color: rgba(255,255,255,0.8); min-height: 500px; padding: 20px; ">
+						
+						<!--开始考勤-->
+						<div>
+							<table class="table" style="margin-top: 15px">
+								<tr>
+									<td>当日口令</td>
+									<td><input type="text" class="form-control" name="" id="kl" value="" /></td>
+									<td><input type="button" name="" id="btnCreateRamom" value="生成随机数" class="btn btn-primary" /></td>
+								</tr>
+								<tr>
+									<td>存活时间</td>
+									<td colspan="2"><input type="text" id="chsj" class="form-control" name="" id="" value="5" /></td>
+								</tr>
+								<tr>
+									<td>接口地址</td>
+									<td colspan="2"><input type="text" id="jkdz" name="" class="form-control"  id="" value="http://qr.liantu.com/api.php?text=" /></td>
+								</tr>
+								<tr>
+									<td>程序地址</td>
+									<td colspan="2"><input type="text" id="cxdz" name="" class="form-control"  id="" value="http://www.xaut.edu.cn?kl=" /></td>
+								</tr>
+								<tr>
+		 							<td align="center" colspan="3"><input type="button" id="createImg" value="生成签到二维码" class="btn btn-info" /></td>
+								</tr>
+							</table>
+						</div>
+						
+						<!--学生信息-->		
+						<div>
+							<!--搜索-->
+							<div class="row">
+								<div class="col-lg-2">
+									<label>
+										选择班级
+									</label>
+								</div>
+								<div class="col-lg-3">
+									<select class="form-control">
+										<option>请选择</option>
+										<option>网络工程152</option>
+									</select>
+								</div>
+								<div class="col-lg-2">
+									<label for="sname">学生姓名</label>
+								</div>
+								<div class="col-lg-3">
+									<input id="sname" placeholder="不输入则全查" class="form-control" />
+								</div>
+								<div class="col-lg-2">
+									<button class="btn btn-info">
+										查找
+									</button>
+								</div>
+							</div>
+							
+							<!--显示结果-->
+							<table class="table " style="margin-top: 15px;" id="t1">
+								<tbody>
+									<tr>
+										<td>学号</td>
+										<td>姓名</td>
+										<td>学院</td>
+										<td>专业</td>
+									</tr>
+									<tr>
+										<td>3150931040</td>
+										<td>张三</td>
+										<td>计算机科学与工程学院</td>
+										<td>网络工程</td>
+									</tr>
+									<tr>
+										<td>3150413024</td>
+										<td>李四</td>
+										<td>自动化学院</td>
+										<td>自动化</td>
+									</tr>
+									<tr>
+										<td>3150931049</td>
+										<td>王五</td>
+										<td>经济管理学院</td>
+										<td>工商管理</td>
+									</tr>
+									<tr>
+										<td>3150431033</td>
+										<td>赵四</td>
+										<td>计算机科学与工程学院</td>
+										<td>物联网</td>
+									</tr>
+									<tr>
+										<td>3150931044</td>
+										<td>张余</td>
+										<td>计算机科学与工程学院</td>
+										<td>软件工程</td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align: left;">
+											<div style="display: inline-block;padding-top: 10px;">
+												<label style="color: darkgrey">当前第x页，共有x页，共x条</label>
+											</div>
+										</td>
+										<td colspan="3" style="text-align: right;">
+											<nav aria-label="...">
+												<ul class="pagination">
+													<li class="disabled">
+														<a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+													</li>
+													<li class="active">
+														<a href="#">1 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">2 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">3 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">4 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">5 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">6 <span class="sr-only">(current)</span></a>
+													</li>
+													<li>
+														<a href="#" aria-label="Next">
+															<span aria-hidden="true">&raquo;</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+	
+							<!--分页导航-->
+						</div>
+						
+						<!--请假消息-->
+						<div>
+							<div>
+								消息状态：<input type="radio" name="state" id="" value="" />已处理 <input type="radio" name="state" id="" value="" />未处理
+							</div>
+	
+							<table class="table " style="margin-top: 15px;" id="t3">
+								<tbody>
+									<tr>
+										<td>请假日期</td>
+										<td>学号</td>
+										<td>姓名</td>
+										<td>详细信息</td>
+										<td>操作</td>
+									</tr>
+									<tr>
+										<td>20180721</td>
+										<td>3150931040</td>
+										<td>张三</td>
+										<td>
+											病假
+										</td>
+										<td>
+											<a href="#">同意</a>
+											<a href="#">不同意</a>
+										</td>
+									</tr>
+									<tr>
+										<td>20180722</td>
+										<td>3150413024</td>
+										<td>李四</td>
+										<td>
+											事假
+										</td>
+										<td>
+											<a href="#">同意</a>
+											<a href="#">不同意</a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align: left;">
+											<div style="display: inline-block;padding-top: 10px;">
+												<label style="color: darkgrey">当前第x页，共有x页，共x条</label>
+											</div>
+										</td>
+										<td colspan="3" style="text-align: right;">
+											<nav aria-label="...">
+												<ul class="pagination">
+													<li class="disabled">
+														<a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+													</li>
+													<li class="active">
+														<a href="#">1 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">2 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">3 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">4 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">5 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">6 <span class="sr-only">(current)</span></a>
+													</li>
+													<li>
+														<a href="#" aria-label="Next">
+															<span aria-hidden="true">&raquo;</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+	
+						</div>
+						
+						<!--考勤记录-->	
+						<div>
+
+							<!--搜索-->
+							<div class="row">
+								<div class="col-lg-2">
+									<label>
+										选择班级
+									</label>
+								</div>
+								<div class="col-lg-3">
+									<select class="form-control">
+										<option>请选择</option>
+										<option>网络152</option>
+									</select>
+								</div>
+								<div class="col-lg-2">
+									<label for="">日期</label>
+								</div>
+								<div class="col-lg-3">
+									<input id="" type="date" class="form-control" />
+								</div>
+	
+							</div>
+							<br />
+							<div class="row">
+								<div class="col-lg-2">
+									<label>
+										学号
+									</label>
+								</div>
+								<div class="col-lg-3">
+									<input id="" class="form-control" />
+								</div>
+								<div class="col-lg-2">
+									<label for="">姓名</label>
+								</div>
+								<div class="col-lg-3">
+									<input id="" class="form-control" />
+								</div>
+								<div class="col-lg-2">
+									<button class="btn btn-info">
+										查找
+									</button>
+								</div>
+							</div>
+							<!--显示结果-->
+	
+							<table id="table2" style="text-align: center;" class="table">
+								<tbody>
+									
+									<tr>
+										<td>日期</td>
+										<td>学号</td>
+										<td>姓名</td>
+										<td>状态</td>
+										<td>操作</td>
+									</tr>
+									<tr>
+										<td>20180723</td>
+										<td>3150931040</td>
+										<td>张三</td>
+										<td>迟到</td>
+										<td>
+											<a href="" style="color:dodgerblue;">修改</a>
+										</td>
+									</tr>
+									<tr>
+										<td>20180722</td>
+										<td>3150413024</td>
+										<td>李四</td>
+										<td>正常</td>
+										<td>
+											<a href="" style="color:dodgerblue;">修改</a>
+										</td>
+									</tr>
+									<tr>
+										<td>20180721</td>
+										<td>3150931049</td>
+										<td>王五</td>
+										<td>缺勤</td>
+										<td>
+											<a href="" style="color:dodgerblue;">修改</a>
+										</td>
+									</tr>
+									<tr>
+										<td>20180720</td>
+										<td>3150431033</td>
+										<td>赵四</td>
+										<td>缺勤</td>
+										<td>
+											<a href="" style="color:dodgerblue;">修改</a>
+										</td>
+									</tr>
+									<tr>
+										<td>20180719</td>
+										<td>3150931044</td>
+										<td>张余</td>
+										<td>正常</td>
+										<td>
+											<a href="" style="color:dodgerblue;">修改</a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align: left;">
+											<div style="display: inline-block;padding-top: 10px;">
+												<label style="color: darkgrey">当前第x页，共有x页，共x条</label>
+											</div>
+										</td>
+										<td colspan="3" style="text-align: right;">
+											<nav aria-label="...">
+												<ul class="pagination">
+													<li class="disabled">
+														<a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+													</li>
+													<li class="active">
+														<a href="#">1 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">2 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">3 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">4 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">5 <span class="sr-only">(current)</span></a>
+													</li>
+													<li class="">
+														<a href="#">6 <span class="sr-only">(current)</span></a>
+													</li>
+													<li>
+														<a href="#" aria-label="Next">
+															<span aria-hidden="true">&raquo;</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</td>
+									</tr>
+	
+								</tbody>
+							</table>
+	
+							<!--分页导航-->
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!--底部栏-->
+		<div style ="background-color:black; color: white; text-align: center; height: 30px; padding-top: 5px;">
+			&copy;2015级网络工程专业 研发
+		</div>
+	</body>
+	
+	<script>
+		
+		
+		
+		$(function(){
+			
+				$("#kl").val(getRandom(10));
+			
+			$(".col-lg-9").children("div:gt(0)").hide();
+		
+			$(".col-lg-3").find("a").attr("href","javascript:void(0);").click(function(){
+				//取得左侧获得活动状态的a，将这个状态去掉
+				$(".col-lg-3").find(".active").removeClass("active");
+				//为当前a增加active样式
+				$(this).addClass("active");
+				//取得当前点击的a相对于父元素的位置，从0开始
+				var index = $(this).index();
+				//首先隐藏右侧显示的div
+				$(".col-lg-9").children("div").hide();
+				$(".col-lg-9").children("div").eq(index).show();
+			});
+			
+			
+			$("#btnCreateRamom").click(function(){
+ 				//生成随机数
+				$("#kl").val(getRandom(10));
+			});
+			
+			$("#createImg").click(function(){
+				//获取到输入的口令/存活时间/接口地址/服务器地址
+				//生成二维码图片并展示出来
+				var kl=$("#kl").val();
+				var jkdz=$("#jkdz").val();
+				var cxdz=$("#cxdz").val();
+				var chsj=$("#chsj").val();
+				//http://qr.liantu.com/api.php?text=http://www.xaut.edu.cn?kl=12012012122,15:49:30
+				var path=jkdz+cxdz+kl+","+chsj;
+				console.log(path);
+				$("#ewimg").attr("src",path);
+				$("#myModal").modal('show');
+			});
+			
+		});
+		
+		function getRandom(leng){
+			var result="";
+			for(var i=1;i<=leng;i++){
+				result+=Math.floor(Math.random()*10);
+			}
+			return result;
+		}
+		
+	</script>
+	
+</html>

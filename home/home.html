@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>理工大二维码签到系统</title>
+		<!--
+        	作者：2015网络工程
+        	时间：2018-07-21
+        	描述：导入bootstrap
+        -->
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<style>
+			.jumbotron {
+				background: rgba(0,0,0,0)
+			}
+			
+			.navbar {
+				margin-bottom: 0px;
+				background: rgba(0,0,0,0);
+			}
+		</style>
+	</head>
+
+	<body background="img/6.jpg">
+		<!--导航条-->
+		<div>
+				<nav class = "navbar navbar-inverse navbar-static-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					      </button>
+						<a class="navbar-brand nav-tabs" class="navbar-brand" href="#">二维码签到子系统</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a class="navbar-brand nav-tabs" href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
+							</li>
+
+							<li>
+								<a class="navbar-brand nav-tabs" href="#"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
+							</li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+				</nav>
+			</div>
+			<!--巨幕-->
+			<div class="jumbotron">
+				<div class="container">
+					<h1 style="color:burlywood">理工大 云办公</h1>
+					<p style="color: bisque">高校办公、服务学生，本系统为二维码签到，是理工大云办公平台的一个子系统。主要承担学生考勤签到，及数据统计分析...</p>
+				</div>
+			</div>
+			<!--登录窗体-->
+			<div class="container" style="min-height: 565px">
+				<div style="margin-top: 50px;">
+				<div class="row">
+					<div class="col-lg-4 col-lg-offset-4">
+						<table class="table table-responsive">
+						<tr>
+							<td><span class="glyphicon glyphicon-user"class="container" style = "font-size: 25px;"></span></td>
+							<td><input class="form-control" type="text" name="" id="" value="" placeholder="Username" aria-describedby="basic-addon1"/></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-lock" class="container" style = "font-size: 25px;"></span></td>
+							<td><input class="form-control" type="password" name="" id="" value="" placeholder="Password" aria-describedby="basic-addon1"/></td>
+						</tr>
+					
+							<tr>
+							<td style="font-weight: bold "><span class="glyphicon glyphicon-education	" class="container" style = "font-size: 25px;"></span></td>
+							<td>
+								<input  type="radio" name="ptype" id="" value="" checked="checked" /><font color="#5CB85C">老师</font>
+								<input type="radio" name="ptype" id="" value="" /><font color="#5CB85C">管理员</font>
+							</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+									<button class="btn btn-primary">
+									<span class="glyphicon glyphicon-log-in"></span>
+									登录
+								</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				</div>
+			</div>
+			<!--版权-->
+			<div style="bottom: 0px; left: 0px; right: 0px; background-color: #000000; color: white; text-align: center; height: 30px; padding-top: 5px;">
+				&copy;2015级网络工程专业 研发
+			</div>
+	</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>二维码签到 学生端</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<style>
+			.navbar {
+				margin-bottom: 0px;
+				background: rgba(0, 0, 0, 0);
+			}
+			
+			.jumbotron {
+				background: rgba(0, 0, 0, 0)
+			}
+			
+			.btn {
+				text-transform: capitalize;
+				color: #fff;
+				padding: 14px 20px;
+			}
+			
+			.btn:hover {
+				color: #fff;
+			}
+			
+			.btn-sm {
+				padding: 11px 16px;
+				border-radius: 5px;
+			}
+			
+			.btn-lg {
+				font-size: 15px;
+			}
+			
+			.button-left>i {
+				margin-left: 7px;
+			}
+			
+			.button-right>i {
+				margin-right: 7px;
+			}
+			
+			.blue,
+			.light-brown,
+			.light-green,
+			.light-orange {
+				background: #0088cc;
+				box-shadow: 0 4px 0 #006394;
+				transition: all 0.2s ease-in-out 0s;
+				position: relative;
+				top: 0;
+			}
+			
+			.light-brown {
+				background: #cec2ab;
+				box-shadow: 0 4px 0 #b9a888;
+			}
+			
+			.light-green {
+				background: #75d69c;
+				box-shadow: 0 4px 0 #b9a888;
+			}
+			
+			.light-orange {
+				background: #f79468;
+				box-shadow: 0 4px 0 #f46e33;
+			}
+			
+			.blue:hover,
+			.light-brown:hover,
+			.light-green:hover,
+			.light-orange:hover {
+				top: 2px;
+				box-shadow: 0 2px 0 #006394;
+			}
+			
+			.light-brown:hover {
+				box-shadow: 0 2px 0 #b9a888;
+			}
+			
+			.light-green:hover {
+				box-shadow: 0 2px 0 #4ac97d;
+			}
+		</style>
+	</head>
+
+	<body background="img/10.jpg">
+
+		<!--导航条-->
+		<div class="navbar navbar-inverse navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+					<a class="navbar-brand nav-tabs" class="navbar-brand" href="#" style="color: blueviolet">学生页面</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a class="navbar-brand nav-tabs" href="javascript:void()" id="login" style="color: blueviolet"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
+						</li>
+						<li>
+							<a class="navbar-brand nav-tabs" href="javascript:void()" id="logout" style="color: blueviolet"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--巨幕-->
+		<div class="jumbotron">
+			<div class="container">
+				<h1 style="color: burlywood">学生端</h1>
+				<p style="color: bisque">一分耕耘、一分收获。</p>
+				<p style="color: bisque">Make your whole year's plan in the spring and the whole day's plan in the morning。</p>
+			</div>
+		</div>
+
+		<!--功能按钮-->
+		<div class="container" id="div_con">
+			<table id="table1" class="table">
+			
+				<tr>
+					<td class="col-sm-3">
+						<button href="#" class="btn btn-sm blue" onclick="showQD()" style="margin-left: 50px; margin-right: 50px;">签到</a>
+	    	</td>
+	    </tr>
+	 	<tr>
+	 		<td class="col-sm-3" style="margin-left: 100px; margin-right: 150px;">
+	        <button href="#" class="btn btn-sm light-brown" onclick="showQJ()">请假</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="col-sm-3">
+						<button href="#" class="btn btn-sm light-green" onclick="showLS()" style="margin-left: 50px; margin-right: 50px;">查看历史</a>
+	    </td>
+		</tr>
+			</table>
+			
+			<table id="table2" style="display: none;" class="table">
+				<tr>
+					<td style="color: brown"><label>选择老师</label></td>
+					<td>
+						<select class="form-control">
+							<option>请选择</option>
+							<option>张翔老师</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="color: brown"><label>请假时间</label></td>
+					<td>
+						<select class="form-control">
+							<option>请选择</option>
+							<option>20180720</option>
+							<option>20180721</option>
+							<option>20180722</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="color: brown"><label>请假原因</label></td>
+					<td>
+						<textarea class="form-control" rows="5"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2"> 
+						<button class="btn btn-danger">
+							提交请假
+						</button>
+					</td>
+				</tr>
+			</table>
+
+			<!--查看历史-->
+			<table id="table3" style="display: none;" class="table">
+				<tr>
+					<td colspan="2">
+						<button onclick="showHome()" class="btn btn-info">
+							<span class="glyphicon glyphicon-backward"></span>
+							返回
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<th>日期</th>
+					<th>状态</th>
+				</tr>
+				<tr>
+					<td>20180721</td>
+					<td>正常</td>
+				</tr>
+				<tr>
+					<td>20180722</td>
+					<td>缺勤</td>
+				</tr>
+				<tr>
+					<td>20180722</td>
+					<td>请假</td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div id="loginPage" style="display: none;">
+			<div class="container"">
+				<table class="table" style="background-color: rgba(255,255,255,0.8)">
+					<tr>
+						<td ><span class="glyphicon glyphicon-user" class="container" style="font-size: 25px;"></span></td>
+						<td><input class="form-control" type="text" name="" id="" value="" placeholder="Username" aria-describedby="basic-addon1" /></td>
+					</tr>
+					<tr>
+							<td><span class="glyphicon glyphicon-lock" class="container" style="font-size: 25px;"></span></td>
+							<td><input class="form-control" type="password" name="" id="" value="" placeholder="Password" aria-describedby="basic-addon1" />
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button class="btn btn-primary">登陆</button>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+
+		<!--底部栏-->
+		<div style=" background-color: #000000; color: white; text-align: center; height: 30px; padding-top: 5px;">
+			&copy;2015级网络工程专业 研发
+		</div>
+	</body>
+	<script>
+		//定义js函数
+		function showQJ() {
+			$("#table1").hide(200);
+			$("#table2").show(400);
+		}
+
+		function showLS() {
+			$("#table1").hide(200);
+			$("#table3").show(400);
+		}
+
+		function showHome() {
+			$("#table3").hide(200);
+			$("#table1").show(400);
+		}
+
+		$(function() {
+			$("#login").click(function() {
+				//$("#table1").hide(200);
+				$("#div_con").children("table:visible").hide();
+				$("#loginPage").show(400);
+			});
+		});
+	</script>
+
+</html>

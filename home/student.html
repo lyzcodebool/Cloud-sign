@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>二维码签到 学生端</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<style>
+			.navbar {
+				margin-bottom: 0px;
+			}
+			
+			.jumbotron {
+				background: linear-gradient(45deg, #020031 0, #6d3353 100%);
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<!--
+        	作者：offline
+        	时间：2018-07-22
+        	描述：导航条
+        -->
+		<div class="navbar navbar-default">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+				<a class="navbar-brand" href="#">Sign in</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="#">登录</a>
+					</li>
+					<li>
+						<a href="#">录入信息</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<!--
+        	作者：offline
+        	时间：2018-07-22
+        	描述：巨幕
+        -->
+		<div class="jumbotron">
+			<div class="container">
+				<h1>学生端</h1>
+				<p>一分耕耘一分收获</p>
+			</div>
+		</div>
+		<!--
+        	作者：offline
+        	时间：2018-07-22
+        	描述：功能按钮
+        -->
+		<div class="container">
+			<table id="table1" class="table">
+				<tr>
+					<td><button class="btn btn-primary btn-block">考勤</button></td>
+				</tr>
+				<tr>
+					<td><button class="btn btn-primary btn-block" onclick="showQJ()">请假</button></td>
+				</tr>
+				<tr>
+					<td><button class="btn btn-primary btn-block">查看历史</button></td>
+				</tr>
+			</table>
+			
+			<table id="table2" style="display: none;" class="table">
+				<tr>
+					<td>选择老师</td>
+					<td>
+						<select class="form-control">
+							<option>请选择</option>
+							<option>张三老师</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>请假时间</td>
+					<td>
+						<select class="form-control">
+							<option>请选择</option>
+							<option>2018-07-22</option>
+							<option>2018-07-23</option>
+							<option>2018-07-24</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>事由</td>
+					<td>
+						<textarea class="form-control" rows="5"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2"> 
+						<button class="btn btn-danger">
+							提交请假
+						</button>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+	</body>
+	<script>
+		//定义js函数
+		function showQJ(){
+			//alert('要显示请假界面了');
+			//在js中要控制某一个html元素，通常需要先为html元素编写id值
+			//id属性值是html网页元素在网页中唯一的标识
+			//document.getElementById("table1")通过标签的id获取元素对象
+			//.style获取样式更改display样式的值即可
+			document.getElementById("table1").style.display="none";
+			document.getElementById("table2").style.display="table";
+		}
+	</script>
+</html>

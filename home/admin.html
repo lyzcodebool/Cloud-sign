@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>二维码签到 管理端</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--引入图标的支持库-->
+		<script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/dhtmlxChart/codebase/dhtmlxchart.js" type="text/javascript"></script>
+		<link rel="STYLESHEET" type="text/css" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/dhtmlxChart/codebase/dhtmlxchart.css">
+		<style>
+			.navbar {
+				margin-bottom: 0px;
+				background: rgba(0,0,0,0)
+			}
+			
+			.jumbotron {
+				background: rgba(0,0,0,0)
+			}
+			
+			body {
+				background-color: #E7E7E7;
+			}
+		</style>
+	</head>
+
+	<body background="img/4.jpg">
+		
+		<!--导航条-->
+		<div class = "navbar navbar-inverse navbar-static-top">
+
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				    </button>
+					<a  class="navbar-brand nav-tabs" class="navbar-brand" href="#">管理员页面</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#" class="navbar-brand nav-tabs"><span class="glyphicon glyphicon-log-out"></span> 安全退出</a>
+						</li>
+					 
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		
+		<!--巨幕-->
+		<div class="jumbotron">
+			<div class="container">
+				<h1 style="color:burlywood">管理端</h1>
+				<p style="color: white">公平、公正、公开</p>
+			</div>
+		</div>
+
+		<!--
+        	作者：offline
+        	时间：2018-07-22
+        	描述：二维码区域
+        -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<img id="ewimg" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--弹出学院-->
+		<div class="modal fade bs-example-modal-sm-xy" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<input type="text" placeholder="请填写学院名称" name="" id="" value="" />
+						<button class="btn btn-info">
+					    添加
+					 </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--弹出系-->
+		<div class="modal fade bs-example-modal-sm-xi" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						选择学院
+						<select>
+							<option value="">请选择</option>
+						</select><br />
+
+						<input type="text" placeholder="请填系名称" name="" id="" value="" />
+						<button class="btn btn-info">
+					    添加
+					 </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--弹出专业-->
+		<div class="modal fade bs-example-modal-sm-zy" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						选择学院
+						<select>
+							<option value="">请选择</option>
+						</select><br /> 选择系
+						<select>
+							<option value="">请选择</option>
+						</select><br />
+
+						<input type="text" placeholder="请专业名称" name="" id="" value="" />
+						<button class="btn btn-info">
+					    添加
+					 </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--弹出班级-->
+		<div class="modal fade bs-example-modal-sm-bj" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						选择学院
+						<select>
+							<option value="">请选择</option>
+						</select><br /> 选择系
+						<select>
+							<option value="">请选择</option>
+						</select><br /> 选择专业
+						<select>
+							<option value="">请选择</option>
+						</select><br />
+
+						<input type="text" placeholder="请填班级名称" name="" id="" value="" />
+						<button class="btn btn-info">
+					    添加
+					 </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--正文-->
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="list-group">
+						<a href="#" class="list-group-item active">数据统计</a>
+						<a href="#" class="list-group-item">教师管理</a>
+						<a href="#" class="list-group-item">数据字典</a>
+
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-9" style="background-color: rgba(255,255,255,0.8); min-height: 500px; padding: 20px; ">
+					<!--开始 数据统计-->
+					<div>
+						
+						<table class="table">
+							<tr>
+								<td>班级</td>
+								<td>
+									<input class="form-control" type="text" name="" id="" value="" />
+								</td>
+								<td>日期</td>
+								<td>
+									<input class="form-control" type="text" name="" id="" value="" />
+									
+								</td>
+							</tr>
+							<tr>
+								<td align="right" colspan="4">
+									<button class="btn btn-primary">
+										查询
+									</button>
+								</td>
+							</tr>
+						</table>
+						
+						<div id="chart1" style="width:100%;height:400px;border:1px solid #A4BED4;"></div>
+					</div>
+					<!--结束 数据统计-->
+
+					<!--开始 教师管理-->
+					<div>
+
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#home" aria-controls="home" role="tab" data-toggle="tab">信息展示</a>
+							</li>
+							<li role="presentation">
+								<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">添加教师</a>
+							</li>
+
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="home">
+								<table class="table table-striped">
+									<tr>
+										<th>编号</th>
+										<th>姓名</th>
+										<th>电话</th>
+										<th>所带班级</th>
+										<th>操作</th>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>一灯大师</td>
+										<td>18502625656</td>
+										<td>一阳指201801</td>
+										<td>
+											<a href="">编辑</a>
+											<a href="">删除</a>
+										</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>一灯大师</td>
+										<td>18502625656</td>
+										<td>一阳指201801</td>
+										<td>
+											<a href="">编辑</a>
+											<a href="">删除</a>
+										</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>一灯大师</td>
+										<td>18502625656</td>
+										<td>一阳指201801</td>
+										<td>
+											<a href="">编辑</a>
+											<a href="">删除</a>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="profile">
+
+								<fieldset>
+									<legend>基本信息</legend>
+									<table class="table">
+
+										<tr>
+											<td>姓名</td>
+											<td><input type="text" class="form-control" name="" id="" value="" /></td>
+											<td>电话</td>
+											<td><input type="text" class="form-control" name="" id="" value="" /></td>
+										</tr>
+
+									</table>
+								</fieldset>
+
+								<fieldset id="fieldsetCon">
+									<legend>所带班级</legend>
+
+									<table id="tableClass" class="table">
+										<tr>
+											<td>选择学院</td>
+											<td>
+												<select class="form-control">
+													<option value="">请选择</option>
+												</select><br /></td>
+											<td>选择系</td>
+											<td colspan="2">
+												<select class="form-control">
+													<option value="">请选择</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>选择专业</td>
+											<td>
+												<select class="form-control">
+													<option value="">请选择</option>
+												</select>
+											</td>
+											<td>选择班级</td>
+											<td>
+												<select class="form-control">
+													<option value="">请选择</option>
+												</select>
+											</td>
+											<td>
+												<span onclick="addClass()" class="glyphicon glyphicon-plus"> </span>
+											</td>
+										</tr>
+									</table>
+
+								</fieldset>
+								<button class="btn btn-primary">添加</button>
+
+							</div>
+
+						</div>
+
+					</div>
+					<!--结束教师管理-->
+
+					<!--开始 数据字典-->
+					<div>
+
+						<table class="table">
+							<tr>
+								<td>学院</td>
+								<td>
+									<select name="" class="form-control">
+										<option value=""></option>
+									</select>
+								</td>
+								<td><span data-toggle="modal" data-target=".bs-example-modal-sm-xy" class="glyphicon glyphicon-plus"></span></td>
+								<td>系</td>
+								<td>
+									<select name="" class="form-control">
+										<option value=""></option>
+									</select>
+								</td>
+								<td colspan="2"><span data-toggle="modal" data-target=".bs-example-modal-sm-xi" class="glyphicon glyphicon-plus"></span></td>
+							</tr>
+							<tr>
+								<td>专业</td>
+								<td>
+									<select name="" class="form-control">
+										<option value=""></option>
+									</select>
+								</td>
+								<td><span data-toggle="modal" data-target=".bs-example-modal-sm-zy" class="glyphicon glyphicon-plus"></span></td>
+								<td>班级</td>
+								<td>
+									<select name="" class="form-control">
+										<option value=""></option>
+									</select>
+								</td>
+								<td><span data-toggle="modal" data-target=".bs-example-modal-sm-bj" class="glyphicon glyphicon-plus"></span></td>
+								<td>
+									<button class="btn btn-info">
+										查询
+									</button>
+								</td>
+							</tr>
+						</table>
+
+						<table class="table " style="margin-top: 15px;">
+							<tr>
+								<th>学院</th>
+								<th>系</th>
+								<th>专业</th>
+								<th>班级</th>
+							</tr>
+							<tr>
+								<td>计算机科学与工程</td>
+								<td>网络系</td>
+								<td>网络工程</td>
+								<td>网络151</td>
+							</tr>
+						</table>
+
+					</div>
+					<!--结束 数据字典-->
+
+				</div>
+			</div>
+
+		</div>
+		<!--底部栏-->
+		<div style="background-color: #000000; color: white; text-align: center; height: 30px; padding-top: 5px;">
+			&copy;2015级网络工程专业 研发
+		</div>
+
+	</body>
+
+	<script>
+		$(function() {
+
+			$("#kl").val(getRandom(10));
+
+			$(".col-lg-9").children("div:gt(0)").hide();
+
+			$(".col-lg-3").find("a").attr("href", "javascript:void(0);").click(function() {
+				//取得左侧获得活动状态的a，将这个状态去掉
+				$(".col-lg-3").find(".active").removeClass("active");
+				//为当前a增加active样式
+				$(this).addClass("active");
+				//取得当前点击的a相对于父元素的位置，从0开始
+				var index = $(this).index();
+				//首先隐藏右侧显示的div
+				$(".col-lg-9").children("div").hide();
+				$(".col-lg-9").children("div").eq(index).show();
+			});
+
+			$("#btnCreateRamom").click(function() {
+				//生成随机数
+				$("#kl").val(getRandom(10));
+			});
+
+			$("#createImg").click(function() {
+				//获取到输入的口令/存活时间/接口地址/服务器地址
+				//生成二维码图片并展示出来
+				var kl = $("#kl").val();
+				var jkdz = $("#jkdz").val();
+				var cxdz = $("#cxdz").val();
+				var chsj = $("#chsj").val();
+				//http://qr.liantu.com/api.php?text=http://www.xaut.edu.cn?kl=12012012122,15:49:30
+				var path = jkdz + cxdz + kl + "," + chsj;
+				console.log(path);
+				$("#ewimg").attr("src", path);
+				$("#myModal").modal('show');
+			});
+
+			//加载图表
+
+			var barChart = new dhtmlXChart({
+				view: "bar",
+				container: "chart1",
+				value: "#sales#",
+				radius: 0,
+				border: true,
+				xAxis: {
+					template: "'#year#"
+				},
+				yAxis: {
+					start: 0,
+					end: 100,
+					step: 10,
+					template: function(obj) {
+						return(obj % 20 ? "" : obj);
+					}
+				}
+			});
+			
+			
+			var barChart1 = new dhtmlXChart({
+			    view: "bar",
+			    container: "chart1",
+			    value: "#sales#",
+			    color: "#58dccd",
+			    gradient: "rising",
+			    tooltip: {
+			        template: "#sales#"
+			    },
+			    width: 60,
+			    tooltip: {
+			        template: "#sales#"
+			    },
+			    xAxis: {
+			        template: "'#year#"
+			    },
+			    yAxis: {
+			        start: 0,
+			        step: 10,
+			        end: 100
+			    },
+			    legend: {
+			        values: [{
+			            text: "Type A",
+			            color: "#58dccd"
+			        }, {
+			            text: "Type B",
+			            color: "#a7ee70"
+			        }, {
+			            text: "Type C",
+			            color: "#36abee"
+			        }],
+			        valign: "middle",
+			        align: "right",
+			        width: 90,
+			        layout: "y"
+			    }
+			});
+			barChart1.addSeries({
+			    value: "#sales2#",
+			    color: "#a7ee70",
+			    tooltip: {
+			        template: "#sales2#"
+			    }
+			});
+			barChart1.addSeries({
+			    value: "#sales3#",
+			    color: "#36abee",
+			    tooltip: {
+			        template: "#sales3#"
+			    }
+			});
+			barChart1.load("http://127.0.0.1:8020/home/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/dhtmlxChart/data2.json", "json");
+						
+		});
+		
+		//为老师绑定班级逻辑
+		function addClass(){
+			//找到容器
+			var newTab = $("#fieldsetCon").find("#tableClass").clone();
+			$("#fieldsetCon").append(newTab);
+		}
+			
+
+		function getRandom(leng) {
+			var result = "";
+			for(var i = 1; i <= leng; i++) {
+				result += Math.floor(Math.random() * 10);
+			}
+			return result;
+		}
+	</script>
+
+</html>
